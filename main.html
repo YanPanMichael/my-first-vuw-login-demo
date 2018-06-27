@@ -1,0 +1,646 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>上海市五险一金及税后工资计算器</title>
+    <link rel="SHORTCUT ICON" href="/assets/images/yuan.ico">
+    <!-- Bootstrap -->
+    <link href="//cdn.staticfile.org/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="//cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="/components/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"> -->
+    <link href="//cdn.staticfile.org/twitter-bootstrap/3.3.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href=".fluid.css?_v=3.0beta" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script src="http://pagead2.googlesyndication.com/pagead/js/r20180620/r20180604/osd.js"></script>
+    <script src="http://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-0782326845495182.js"></script>
+    <script src="http://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-0782326845495182.js"></script>
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-23598914-1', 'sinaapp.com');
+        ga('send', 'pageview');
+
+    </script>
+    <!-- End Google Analytics -->
+
+    <!-- Google page level ad -->
+    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-0782326845495182",
+            enable_page_level_ads: true
+        });
+    </script>
+    <link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=salarycalculator.sinaapp.com" as="script">
+    <script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=salarycalculator.sinaapp.com"></script>
+</head>
+
+<body>
+    <div class="container-fluid" id="full-container">
+        <div class="row" id="full-row">
+
+
+            <div class="main">
+                <div style="max-width:960px;">
+                    <div class="col-md-9 form-inline">
+                        <h2 class="calculator-title">
+                            <span class="nohidden">上海市</span>五险一金及税后工资计算器</h2>
+                        <div id="origin_salary">
+                            <span>税前：</span>
+                            <div class="input-group">
+                                <div class="input-group-addon">￥</div>
+                                <input class="form-control input_text align_right" type="text" maxlength="12" id="input_origin_salary" value="0">
+                            </div>
+                            <input type="button" class="btn btn-danger" id="execute" value="计算">
+                        </div>
+                        <div id="result" style="display: block;">
+                            <span>税后：</span>
+                            <div class="input-group">
+                                <div class="input-group-addon">￥</div>
+                                <input disabled="" class="form-control input_text align_right" type="text" maxlength="12" id="final_salary" value="0">
+                            </div>
+                        </div>
+
+                        <div class="options">
+                            <input type="hidden" id="max_base_3j" value="21396">
+                            <input type="hidden" id="min_base_3j" value="4279">
+                            <input type="hidden" id="max_base_gjj" value="19512">
+                            <input type="hidden" id="min_base_gjj" value="2190">
+                            <input type="hidden" id="city" value="shanghai">
+                            <fieldset>
+                                <legend>更多选项：</legend>
+                                <table class="options-table" style="table-layout:fixed;">
+                                    <tbody>
+                                        <tr>
+                                            <td width="115px;">社保汇缴基数：</td>
+                                            <td>
+                                                <input type="text" maxlength="12" class="form-control input_text align_right" id="input_base_3j" disabled="disabled">
+                                            </td>
+                                            <td style="padding-left:6px;">
+                                                <label class="checkbox" for="input_is_base_3j_customize">
+                                                    <input type="checkbox" id="input_is_base_3j_customize">自定义</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>公积金汇缴基数：</td>
+                                            <td>
+                                                <input type="text" maxlength="12" class="form-control input_text align_right" id="input_base_gjj" disabled="disabled">
+                                            </td>
+                                            <td style="padding-left:6px;">
+                                                <label class="checkbox" for="input_is_base_gjj_customize">
+                                                    <input type="checkbox" id="input_is_base_gjj_customize">自定义</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <label class="checkbox" for="input_is_gjj">
+                                                    <input type="checkbox" id="input_is_gjj" checked="checked">汇缴公积金</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <label class="checkbox" for="input_is_exgjj">
+                                                    <input type="checkbox" id="input_is_exgjj">汇缴补充住房公积金
+                                                    <span style="color:#666;">(非政策强制)</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                单位与个人汇缴比例：
+                                                <select class="form-control" id="input_factor_exgjj" disabled="disabled">
+                                                    <option value="0.01">1%</option>
+                                                    <option value="0.02">2%</option>
+                                                    <option value="0.03">3%</option>
+                                                    <option value="0.04">4%</option>
+                                                    <option value="0.05">5%</option>
+                                                    <option value="0.06">6%</option>
+                                                    <option value="0.07">7%</option>
+                                                    <option value="0.08" selected="selected">8%</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+
+                        <div id="mid-ad" style="overflow:hidden;">
+                            <div class="ad">
+                                <script type="text/javascript">
+                                    google_ad_client = "ca-pub-0782326845495182";
+                                    var width = window.innerWidth || document.documentElement.clientWidth;
+                                    if (width >= 1270) {
+                                        google_ad_slot = "4155099605";
+                                        google_ad_width = 690;
+                                        google_ad_height = 90;
+                                    } else if (width >= 992) {
+                                        google_ad_slot = "7108566003";
+                                        google_ad_width = 540;
+                                        google_ad_height = 90;
+                                    } else if (width >= 768) {
+                                        google_ad_slot = "4155099605";
+                                        google_ad_width = 690;
+                                        google_ad_height = 90;
+                                    } else if (width >= 480) {
+                                        google_ad_slot = "3458184818";
+                                        google_ad_width = 468;
+                                        google_ad_height = 60;
+                                    } else {
+                                        google_ad_slot = "2778354003";
+                                        google_ad_width = 320;
+                                        google_ad_height = 100;
+                                    }
+                                </script>
+                                <!-- 五险一金计算器中部 -->
+                                <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                                </script>
+                                <ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:690px;background-color:transparent;">
+                                    <ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:690px;background-color:transparent;">
+                                        <iframe width="690" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0"
+                                            hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}"
+                                            id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:690px;height:90px;"></iframe>
+                                    </ins>
+                                </ins>
+                            </div>
+
+                        </div>
+
+                        <div id="detail" style="">
+
+                            <div>
+                                <div>
+                                    <strong>五险一金汇缴明细：</strong>
+                                </div>
+                                <div id="detail-tables">
+                                    <table class="table" id="detail_table" style="table-layout:fixed;width:100%;border-collapse:collapse;margin:5px 0;">
+                                        <tbody>
+                                            <tr style="height:0px; font-size:0px; line-height:0px; margin:0; padding:0; border-width:0px;">
+                                                <td style="height:0px; font-size:0px; line-height:0px; margin:0; border-width:0px;"></td>
+                                                <td style="height:0px; font-size:0px; line-height:0px; margin:0; border-width:0px;"></td>
+                                                <td style="height:0px; font-size:0px; line-height:0px; margin:0; border-width:0px;" width="60px;"></td>
+                                                <td style="height:0px; font-size:0px; line-height:0px; margin:0; border-width:0px;"></td>
+                                                <td style="height:0px; font-size:0px; line-height:0px; margin:0; border-width:0px;" width="60px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="2">个人应缴部分：
+                                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="" data-original-title="此部分为个人缴纳，采取单位代缴，从个人税前工资中扣除的方式">?</span>
+                                                </td>
+                                                <td colspan="2">单位应缴部分：
+                                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="" data-original-title="此部分由单位额外缴纳">?</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>养老保险金：</td>
+                                                <td class="align_right" id="show_personal_yanglao">1600.00</td>
+                                                <td> (8%)</td>
+                                                <td class="align_right" id="show_org_yanglao">4000.00</td>
+                                                <td> (20%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>医疗保险金：</td>
+                                                <td class="align_right" id="show_personal_yiliao">400.00</td>
+                                                <td> (2%)</td>
+                                                <td class="align_right" id="show_org_yiliao">1900.00</td>
+                                                <td> (9.5%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>失业保险金：</td>
+                                                <td class="align_right" id="show_personal_shiye">100.00</td>
+                                                <td> (0.5%)</td>
+                                                <td class="align_right" id="show_org_shiye">100.00</td>
+                                                <td> (0.5%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>基本住房公积金：</td>
+                                                <td class="align_right" id="show_personal_gjj">1365.84</td>
+                                                <td> (7%)</td>
+                                                <td class="align_right" id="show_org_gjj">1365.84</td>
+                                                <td> (7%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>补充住房公积金：</td>
+                                                <td class="align_right" id="show_personal_exgjj">0.00</td>
+                                                <td class="show_percent_factor_exgjj"> (0%)</td>
+                                                <td class="align_right" id="show_org_exgjj">0.00</td>
+                                                <td class="show_percent_factor_exgjj"> (0%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>工伤保险金：</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="align_right" id="show_org_gongshang">40.00</td>
+                                                <td> (0.2%)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>生育保险金：</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="align_right" id="show_org_shengyu">200.00</td>
+                                                <td> (1%)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table" id="sum" style="table-layout:fixed;width:100%;border-collapse:collapse;margin:5px 0;">
+                                        <tbody>
+                                            <tr>
+                                                <td>共计支出：</td>
+                                                <td class="align_right" id="show_personal_allpay">3465.84</td>
+                                                <td width="60px;"></td>
+                                                <td class="align_right" id="show_org_allpay">7605.84</td>
+                                                <td width="60px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>扣除四金后月薪：</td>
+                                                <td class="align_right" id="show_before_tax">16534.16</td>
+                                                <td>
+                                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="" data-original-title="税前工资扣除掉个人缴纳的五险一金以后，即为“应税工资”">?</span>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>个人所得税：</td>
+                                                <td class="align_right" id="show_tax">2253.54</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>税后月薪：</td>
+                                                <td class="align_right" id="show_result">14280.62</td>
+                                                <td>
+                                                    <span class="badge" data-toggle="tooltip" data-placement="right" title="" data-original-title="最终发到手里的可支配工资">?</span>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="chart">
+                                    <div id="chart1" data-highcharts-chart="0">
+                                        <div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 348px; height: 300px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                            <svg version="1.1" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;"
+                                                xmlns="http://www.w3.org/2000/svg" width="348" height="300">
+                                                <desc>Created with Highcharts 4.0.4</desc>
+                                                <defs>
+                                                    <clipPath id="highcharts-1">
+                                                        <rect x="0" y="0" width="328" height="238"></rect>
+                                                    </clipPath>
+                                                </defs>
+                                                <rect x="0" y="0" width="348" height="300" strokewidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
+                                                <g class="highcharts-series-group" zindex="3">
+                                                    <g class="highcharts-series highcharts-tracker" visibility="visible" zindex="0.1" transform="translate(10,47) scale(1 1)"
+                                                        style="cursor:pointer;">
+                                                        <path fill="#7cb5ec" d="M 163.98166941166744 29.000001866724844 A 90 90 0 1 1 76.3006214210522 139.21927290647193 L 164 119 A 0 0 0 1 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#434348" d="M 76.28044600120124 139.13156343287395 A 90 90 0 0 1 77.39169462981278 94.52549406209806 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#90ed7d" d="M 77.41621243582067 94.43889800841454 A 90 90 0 0 1 81.15391680138977 83.83572126932003 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#f7a35c" d="M 81.18912249729787 83.75289278206701 A 90 90 0 0 1 82.28363920908373 81.28479909785973 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#8085e9" d="M 82.32139526187699 81.20310160828708 A 90 90 0 0 1 105.37667521497104 50.711598414159596 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#f15c80" d="M 105.44499291683546 50.65300924334305 A 90 90 0 0 1 105.37667521497104 50.711598414159596 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#e4d354" d="M 105.44499291683546 50.65300924334305 A 90 90 0 0 1 163.87499180557356 29.00008681697895 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                    </g>
+                                                    <g class="highcharts-markers" visibility="visible" zindex="0.1" transform="translate(10,47) scale(1 1)"></g>
+                                                </g>
+                                                <text x="174" text-anchor="middle" class="highcharts-title" zindex="4" style="color:#333333;font-size:18px;fill:#333333;width:284px;"
+                                                    y="25">
+                                                    <tspan>税前工资去向 (共￥20000.00)</tspan>
+                                                </text>
+                                                <g class="highcharts-data-labels highcharts-tracker" visibility="visible" zindex="6" transform="translate(10,47) scale(1 1)"
+                                                    opacity="1" style="cursor:pointer;">
+                                                    <path fill="none" d="M 262.87961847463873 193.74367689013076 C 257.87961847463873 193.74367689013076 251.62097724299616 188.76076509745536 243.01534554948762 181.90926138252672 L 234.40971385597908 175.05775766759808"
+                                                        stroke="#7cb5ec" stroke-width="1"></path>
+                                                    <path fill="none" d="M 39.03848693861978 115.96102253639452 C 44.03848693861978 115.96102253639452 52.0359211427118 116.16362103396823 63.03239317333832 116.44219396813206 L 74.02886520396484 116.72076690229589"
+                                                        stroke="#434348" stroke-width="1"></path>
+                                                    <path fill="none" d="M 41.42449234640746 95 C 46.42449234640746 95 58.39232251478306 81.70364017523423 68.7645051249383 85.36667551516658 L 79.13668773509353 89.02971085509893"
+                                                        stroke="#90ed7d" stroke-width="1"></path>
+                                                    <path fill="none" d="M 49.33297972015809 70.28506735157336 C 54.33297972015809 70.28506735157336 61.64411440548088 73.53272952813512 71.69692459779972 77.99826502090757 L 81.74973479011857 82.46380051368001"
+                                                        stroke="#f7a35c" stroke-width="1"></path>
+                                                    <path fill="none" d="M 63.345190317553374 46.54203022016891 C 68.34519031755337 46.54203022016891 74.72217762971647 51.37256153882433 83.49053518394075 58.01454210197551 L 92.25889273816503 64.65652266512669"
+                                                        stroke="#8085e9" stroke-width="1"></path>
+                                                    <path fill="none" d="M 92.66750419289201 19 C 97.66750419289201 19 91.16714904452286 33.9154783659375 98.32037547765007 42.27199388356864 L 105.47360191077729 50.62850940119978"
+                                                        stroke="#f15c80" stroke-width="1"></path>
+                                                    <path fill="none" d="M 143.5403751662597 0 C 148.5403751662597 0 125.17646604838114 13.944142421721686 128.98949170434372 24.26212843387402 L 132.8025173603063 34.58011444602636"
+                                                        stroke="#e4d354" stroke-width="1"></path>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(268,184)">
+                                                        <text x="3" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">税后月薪</tspan>
+                                                            <tspan dx="0">: 71.4 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-59,106)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">养老保险金</tspan>
+                                                            <tspan dx="0">: 8.0 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-57,85)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">医疗保险金</tspan>
+                                                            <tspan dx="0">: 2.0 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-49,60)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">失业保险金</tspan>
+                                                            <tspan dx="0">: 0.5 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-57,37)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">基本住房公积金</tspan>
+                                                            <tspan dx="0">: 6.8 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-28,9)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">补充住房公积金</tspan>
+                                                            <tspan dx="0">: 0.0 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(38,-10)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人所得税</tspan>
+                                                            <tspan dx="0">: 11.3 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                </g>
+                                                <g class="highcharts-legend" zindex="7">
+                                                    <g zindex="1">
+                                                        <g></g>
+                                                    </g>
+                                                </g>
+                                                <g class="highcharts-tooltip" zindex="8" style="cursor:default;padding:0;white-space:nowrap;" transform="translate(0,-9999)">
+                                                    <path fill="none" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.049999999999999996"
+                                                        stroke-width="5" transform="translate(1, 1)"></path>
+                                                    <path fill="none" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3"
+                                                        transform="translate(1, 1)"></path>
+                                                    <path fill="none" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1"
+                                                        transform="translate(1, 1)"></path>
+                                                    <path fill="rgba(249, 249, 249, .85)" d="M 3 0 L 13 0 C 16 0 16 0 16 3 L 16 13 C 16 16 16 16 13 16 L 3 16 C 0 16 0 16 0 13 L 0 3 C 0 0 0 0 3 0"></path>
+                                                    <text x="8" zindex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21"></text>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div id="chart2" data-highcharts-chart="1">
+                                        <div class="highcharts-container" id="highcharts-2" style="position: relative; overflow: hidden; width: 348px; height: 300px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                            <svg version="1.1" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;"
+                                                xmlns="http://www.w3.org/2000/svg" width="348" height="300">
+                                                <desc>Created with Highcharts 4.0.4</desc>
+                                                <defs>
+                                                    <clipPath id="highcharts-3">
+                                                        <rect x="0" y="0" width="328" height="238"></rect>
+                                                    </clipPath>
+                                                </defs>
+                                                <rect x="0" y="0" width="348" height="300" strokewidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
+                                                <path fill="rgba(141,70,83,0.25)" d="M 0 0"></path>
+                                                <g class="highcharts-series-group" zindex="3">
+                                                    <g class="highcharts-series highcharts-tracker" visibility="visible" zindex="0.1" transform="translate(10,47) scale(1 1)"
+                                                        style="cursor:pointer;">
+                                                        <path fill="#7cb5ec" d="M 163.98166941166744 29.000001866724844 A 90 90 0 1 1 154.2806610761022 208.47365227195326 L 164 119 A 0 0 0 1 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#434348" d="M 154.1911922984116 208.46388819782683 A 90 90 0 0 1 123.06350816399976 199.15112997432468 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#90ed7d" d="M 122.98337751562818 199.11015341374977 A 90 90 0 0 1 115.94919837291076 195.09941171253638 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#f7a35c" d="M 115.87312299928027 195.05132286921508 A 90 90 0 0 1 114.28677418804953 194.02396403396733 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#8085e9" d="M 114.2117750931304 193.974213304462 A 90 90 0 0 1 93.71347075708901 175.21213220458213 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#f15c80" d="M 93.65729377751481 175.14181758098988 A 90 90 0 0 1 93.71347075708901 175.21213220458213 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#e4d354" d="M 93.65729377751481 175.14181758098988 A 90 90 0 0 1 75.17249365735661 133.48012834707103 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#8085e8" d="M 75.15805794517237 133.3912936154694 A 90 90 0 0 1 98.11165555912906 57.69154979253552 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#8d4653" d="M 98.17299694328793 57.62569211329859 A 90 90 0 0 1 129.8339114051304 35.73729292097498 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#91e8e1" d="M 129.91719118137522 35.703168469424526 A 90 90 0 0 1 131.75782136158338 34.97356417978666 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#7cb5ec" d="M 131.84186390448718 34.94136401973634 A 90 90 0 0 1 132.51535487421532 34.68679153712982 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#434348" d="M 132.59968381094728 34.65534905385219 A 90 90 0 0 1 136.42569970429622 33.328196218345255 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#90ed7d" d="M 136.51138528094828 33.30066475854359 A 90 90 0 0 1 163.87499180557356 29.00008681697895 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                        <path fill="#f7a35c" d="M 163.9649917662607 29.0000068087582 A 90 90 0 0 1 163.87499180557356 29.00008681697895 L 164 119 A 0 0 0 0 0 164 119 Z"
+                                                            stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round" transform="translate(0,0)"></path>
+                                                    </g>
+                                                    <g class="highcharts-markers" visibility="visible" zindex="0.1" transform="translate(10,47) scale(1 1)"></g>
+                                                </g>
+                                                <text x="174" text-anchor="middle" class="highcharts-title" zindex="4" style="color:#333333;font-size:18px;fill:#333333;width:284px;"
+                                                    y="25">
+                                                    <tspan>单位成本去向 (共￥27605.84)</tspan>
+                                                </text>
+                                                <g class="highcharts-data-labels highcharts-tracker" visibility="visible" zindex="6" transform="translate(10,47) scale(1 1)"
+                                                    opacity="1" style="cursor:pointer;">
+                                                    <path fill="none" d="M 288.8227229218679 125.52035824086904 C 283.8227229218679 125.52035824086904 275.8345413937434 125.08566769147777 264.8507917925722 124.48796818606478 L 253.86704219140094 123.89026868065179"
+                                                        stroke="#7cb5ec" stroke-width="1"></path>
+                                                    <path fill="none" d="M 124.59272148243258 233.9614682622597 C 129.59272148243258 233.9614682622597 131.88654005027044 226.29737037810904 135.04054058104745 215.7592357874019 L 138.19454111182446 205.22110119669478"
+                                                        stroke="#434348" stroke-width="1"></path>
+                                                    <path fill="none" d="M 79.62746066806228 209 C 84.62746066806228 209 108.50379764539134 216.28397362472575 113.9543175195047 206.7292976437259 L 119.40483739361805 197.17462166272603"
+                                                        stroke="#90ed7d" stroke-width="1"></path>
+                                                    <path fill="none" d="M 62.25807527240323 190 C 67.25807527240323 190 103.06105749830141 212.97044900805082 109.04613220828966 203.7412084804744 L 115.03120691827792 194.51196795289798"
+                                                        stroke="#f7a35c" stroke-width="1"></path>
+                                                    <path fill="none" d="M 50.8519533232338 171 C 55.8519533232338 171 88.30388295966065 201.54754911573843 95.73832302612256 193.44020054187126 L 103.17276309258446 185.3328519680041"
+                                                        stroke="#8085e9" stroke-width="1"></path>
+                                                    <path fill="none" d="M 43.62669286182354 152 C 48.62669286182354 152 76.43728078289874 188.83387575745087 85.0371907060069 181.97519153127266 L 93.63710062911505 175.11650730509444"
+                                                        stroke="#f15c80" stroke-width="1"></path>
+                                                    <path fill="none" d="M 39.81946467648335 133 C 44.81946467648335 133 61.58733827955352 164.33924039210842 71.64572469852594 159.8862792821692 L 81.70411111749836 155.43331817222997"
+                                                        stroke="#e4d354" stroke-width="1"></path>
+                                                    <path fill="none" d="M 39.10421191718201 114 C 44.10421191718201 114 56.83450143063848 86.4491794822285 67.35968432584363 89.64613506879535 L 77.88486722104878 92.84309065536219"
+                                                        stroke="#8085e8" stroke-width="1"></path>
+                                                    <path fill="none" d="M 41.42449234640746 95 C 46.42449234640746 95 100.3467031247568 26.84655298410074 106.59836621071818 35.89733795887656 L 112.85002929667957 44.948122933652385"
+                                                        stroke="#8d4653" stroke-width="1"></path>
+                                                    <path fill="none" d="M 46.96875435843802 76 C 51.96875435843802 76 122.78214761337065 14.860244648673984 126.83032954420032 25.08825633496493 L 130.87851147503 35.31626802125588"
+                                                        stroke="#91e8e1" stroke-width="1"></path>
+                                                    <path fill="none" d="M 56.25760368766943 57 C 61.25760368766943 57 124.44648857085491 14.21679651001078 128.33120844336023 24.508003995634724 L 132.21592831586554 34.799211481258666"
+                                                        stroke="#7cb5ec" stroke-width="1"></path>
+                                                    <path fill="none" d="M 70.46187261975777 38 C 75.46187261975777 38 127.32276732123242 13.175708823410751 130.92499553075425 23.569165992540054 L 134.52722374027607 33.962623161669356"
+                                                        stroke="#434348" stroke-width="1"></path>
+                                                    <path fill="none" d="M 92.66750419289201 19 C 97.66750419289201 19 146.661297923529 8.350239899476605 148.3642061631824 19.21762705220658 L 150.06711440283578 30.085014204936556"
+                                                        stroke="#90ed7d" stroke-width="1"></path>
+                                                    <path fill="none" d="M 143.5403751662597 0 C 148.5403751662597 0 163.99999999999997 7 163.99999999999997 18 L 163.99999999999997 29"
+                                                        stroke="#f7a35c" stroke-width="1"></path>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(294,116)">
+                                                        <text x="3" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人税后月薪</tspan>
+                                                            <tspan dx="0">: 51.7 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(4,224)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人养老保险金</tspan>
+                                                            <tspan dx="0">: 5.8 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-41,199)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人医疗保险金</tspan>
+                                                            <tspan dx="0">: 1.4 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-58,180)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人失业保险金</tspan>
+                                                            <tspan dx="0">: 0.4 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-91,161)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人基本住房公积金</tspan>
+                                                            <tspan dx="0">: 4.9 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-99,142)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人补充住房公积金</tspan>
+                                                            <tspan dx="0">: 0.0 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-58,123)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">个人所得税</tspan>
+                                                            <tspan dx="0">: 8.2 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-88,104)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业养老保险金</tspan>
+                                                            <tspan dx="0">: 14.5 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-79,85)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业医疗保险金</tspan>
+                                                            <tspan dx="0">: 6.9 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-73,66)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业失业保险金</tspan>
+                                                            <tspan dx="0">: 0.4 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-64,47)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业工伤保险金</tspan>
+                                                            <tspan dx="0">: 0.1 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-50,28)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业生育保险金</tspan>
+                                                            <tspan dx="0">: 0.7 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(-50,9)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业基本住房公积金</tspan>
+                                                            <tspan dx="0">: 4.9 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                    <g zindex="1" style="cursor:pointer;" transform="translate(1,-10)">
+                                                        <text x="0" zindex="1" style="font-size:11px;color:black;fill:black;" y="16">
+                                                            <tspan style="font-weight:bold">企业补充住房公积金</tspan>
+                                                            <tspan dx="0">: 0.0 %</tspan>
+                                                        </text>
+                                                    </g>
+                                                </g>
+                                                <g class="highcharts-legend" zindex="7">
+                                                    <g zindex="1">
+                                                        <g></g>
+                                                    </g>
+                                                </g>
+                                                <g class="highcharts-tooltip" zindex="8" style="cursor:default;padding:0;white-space:nowrap;" transform="translate(253,-9999)"
+                                                    opacity="0" visibility="visible">
+                                                    <path fill="none" d="M 3.5 0.5 L 83.5 0.5 C 86.5 0.5 86.5 0.5 86.5 3.5 L 86.5 57.5 C 86.5 60.5 86.5 60.5 83.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.049999999999999996"
+                                                        stroke-width="5" transform="translate(1, 1)" width="86" height="60"></path>
+                                                    <path fill="none" d="M 3.5 0.5 L 83.5 0.5 C 86.5 0.5 86.5 0.5 86.5 3.5 L 86.5 57.5 C 86.5 60.5 86.5 60.5 83.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3"
+                                                        transform="translate(1, 1)" width="86" height="60"></path>
+                                                    <path fill="none" d="M 3.5 0.5 L 83.5 0.5 C 86.5 0.5 86.5 0.5 86.5 3.5 L 86.5 57.5 C 86.5 60.5 86.5 60.5 83.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                                                        isshadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1"
+                                                        transform="translate(1, 1)" width="86" height="60"></path>
+                                                    <path fill="rgba(249, 249, 249, .85)" d="M 3.5 0.5 L 83.5 0.5 C 86.5 0.5 86.5 0.5 86.5 3.5 L 86.5 57.5 C 86.5 60.5 86.5 60.5 83.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+                                                        stroke="#8d4653" stroke-width="1"></path>
+                                                    <text x="8" zindex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21">
+                                                        <tspan style="font-size: 10px">企业医疗保险金</tspan>
+                                                        <tspan x="8" dy="16">￥1,900</tspan>
+                                                        <tspan x="8" dy="16">比例: </tspan>
+                                                        <tspan style="font-weight:bold" dx="0">6.9%</tspan>
+                                                    </text>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none;">
+        <ins id="aswift_2_expand" style="display:inline-table;border:none;height:NaNpx;margin:0;padding:0;position:relative;visibility:visible;width:NaNpx;background-color:transparent;">
+            <ins id="aswift_2_anchor" style="display:block;border:none;height:NaNpx;margin:0;padding:0;position:relative;visibility:visible;width:NaNpx;background-color:transparent;">
+                <iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true"
+                    onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}"
+                    id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;width:NaNpx;height:NaNpx;"></iframe>
+            </ins>
+        </ins>
+    </ins>
+    <!-- Modal -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/components/jquery/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//cdn.staticfile.org/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- <script src="/components/bootstrap/js/bootstrap.min.js"></script> -->
+
+    <script src="http://cdn.staticfile.org/highcharts/4.0.4/highcharts.js"></script>
+    <script src="main2.js?_v=3.0"></script>
+    <script type="text/javascript" src="http://v1.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+
+    <iframe id="google_osd_static_frame_8543891331372" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
+
+</body>
+
+</html>
